@@ -1,0 +1,66 @@
+{%extends 'articles/base.html'%}
+{%block title%} Categories {%endblock%}
+
+{%block content%}
+
+<style>
+  .search {
+    text-align: center;
+    padding: 20px;
+  }
+  .search form input {
+    border-radius: 8px;
+  }
+  .article-content {
+    margin: 10px;
+  }
+  .article-content:hover{
+    box-shadow: 1px 1px 1px rgb(147, 146, 146);
+    border: 1px 1px rgb(143, 199, 234);
+  }
+  .image-article {
+    height: 100%;
+  }
+  h1{
+    text-align: center;
+    margin-top: 10px;
+
+  }
+</style>
+<h1>Items by Categories </h1>
+<div class="search">
+  <form method="GET" >
+    <input type="text" name="searchvalue" placeholder="Rechercher..." />
+    <button type="submit" class="btn btn-info"> <i class="bi bi-search"></i> Rechercher</button>
+  </form>
+</div>
+<div class="container-fluid d-flex flex-wrap justify-content-center">
+  {%if articles%} {%for article in articles%} {%if article.publiche%}
+  <div class="card article-content" style="width: 18rem">
+    {%if article.imagearticle%}
+    <img
+      src="{{article.imagearticle.url}}"
+      class="card-img-top image-article"
+      alt="{{article.imagearticle.url}}"
+    />
+    {%else%}
+    <img src="" class="card-img-top" alt="altilce image" />
+    {%endif%}
+    <div class="card-body">
+      <h5 class="card-title">{{article.title}} ( {{article.categorie}} )</h5>
+      <small>{{article.date_pub}}</small>
+      <p class="card-text">{{article.sumary}}</p>
+      <a href="{%url 'articles:article_detail' article.pk%}" class="btn btn-primary"
+        >Read More</a
+      >
+    </div>
+
+    {%endif%}
+  </div>
+  {%endfor%} {%else%}
+  <p>No Available Items</p>
+  {%endif%}
+</div>
+
+
+{%endblock%}

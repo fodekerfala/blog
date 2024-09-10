@@ -1,0 +1,43 @@
+{%extends 'articles/base.html'%}
+{%block title %} View the Categories{%endblock%}
+
+{%block content%}
+<style>
+  ul li{
+    margin: 10px;
+    text-align: center;
+  }
+.list-group-item:nth-child(odd){
+  background-color: #f0f0f0;
+}
+h4{
+  display: inline-flex;
+}
+</style>
+<div class="container">
+  <ul class="list-group">
+    {%for categorie in categories%}
+    <li class="list-group-item">
+      <i class="bi bi-bookmark-check-fill"></i> 
+      <h4 >{{categorie.title}}</h4> ---
+      <a
+        class="btn btn-info"
+        href="{%url 'articles:article_by_categorie' categorie.pk%} "
+      >
+        <i class="bi bi-pencil-fill"> </i> See the articles</a
+      >- 
+      <a
+        class="btn btn-warning"
+        href="{% url 'articles:update_categorie' categorie.pk%}"
+      >
+        <i class="bi bi-pencil-fill"> </i>Update</a
+      >
+      -
+      <a class="btn btn-danger" href="{%url 'articles:delete_categorie' categorie.pk%}">
+        <i class="bi bi-trash3-fill"></i> Delete</a
+      >
+    </li>
+    {%endfor%}
+  </ul>
+</div>
+{%endblock%}

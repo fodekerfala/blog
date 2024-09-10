@@ -1,0 +1,18 @@
+{% extends 'articles/base.html' %}
+{% block title %}Confirm deletion{%endblock %}
+    
+{% block content %}
+<div class="container d-flex justify-content-center">
+  <div class="dialog-confirm">
+    <h1>Delete Item</h1>
+    <p>
+      Are you sure you want delete this item"{{ categories.title }}" ?
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete</button>
+      <a href="{%url 'articles:view_categorie'%}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{%extends 'articles/base.html'%} {%block title %} Ajouter un article
+{%endblock%} {%block content%}
+<style>
+  .content-form {
+    margin: 40px auto;
+    padding: 20px;
+    border: 2px 2px solid rgb(28, 27, 27);
+    background-color: rgb(238, 241, 241);
+    border-radius: 12px;
+    box-shadow: 1px 1px 2px rgb(92, 91, 91);
+  }
+  .bouton{
+    margin: 8px;
+  }
+  h2{
+    text-align: center;
+  }
+</style>
+<div class="container content-form">
+  <h2>Redaction des articles</h2>
+  <div class="border-secondary">
+    <form action="" method="post" enctype="multipart/form-data">
+      {%csrf_token%} {{form.as_p}}
+      <div class="row">
+        <button class="btn btn-primary col bouton" type="submit"><i class="bi bi-pencil-fill"></i>  Publier</button>
+      </div>
+    </form>
+  </div>
+</div>
+{%endblock%}

@@ -1,0 +1,29 @@
+{%extends 'articles/base.html'%}
+
+{%block title %} Ajouter un article
+{%endblock%} {%block content%}
+<style>
+  .content-form {
+    margin: 40px auto;
+    padding: 20px;
+    border: 2px 2px solid rgb(28, 27, 27);
+    background-color: rgba(227, 242, 242, 0.565);
+    border-radius: 12px;
+    box-shadow: 1px 1px 2px rgb(92, 91, 91);
+  }
+  .bouton{
+    margin: 8px;
+  }
+</style>
+
+<div class="container content-form">
+    <h1>Item Creation</h1>
+  <form action="" method="post" enctype="multipart/form-data">
+    {%csrf_token%} {{form.as_p}}
+    <div class="row">
+        <button class="btn btn-primary col bouton" type="submit"><i class="bi bi-pencil-fill"></i>Publish</button>
+         <a class="btn btn-danger col bouton" type="reset" href="">Cancel</a>
+      </div>
+  </form>
+</div>
+{%endblock%}

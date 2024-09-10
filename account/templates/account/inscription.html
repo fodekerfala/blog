@@ -1,0 +1,114 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-sm border-light">
+                    <div class="card-body">
+                        <h1 class="text-center font-weight-bold mb-4">Register</h1>
+                        
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            
+                            <!-- Prénom -->
+                            <div class="form-group position-relative mb-3">
+                                {{ form.first_name.label_tag }}
+                                <div class="input-group">
+                                    <input type="text" name="first_name" id="id_first_name" class="form-control" placeholder="Prénom" value="{{ form.first_name.value|default:'' }}" {% if form.first_name.errors %} is-invalid {% endif %}>
+                                    <i class="bi bi-person position-absolute top-50 end-0 translate-middle-y me-2"></i>
+                                </div>
+                                {% if form.first_name.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.first_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Nom -->
+                            <div class="form-group position-relative mb-3">
+                                {{ form.last_name.label_tag }}
+                                <div class="input-group">
+                                    <input type="text" name="last_name" id="id_last_name" class="form-control" placeholder="Nom" value="{{ form.last_name.value|default:'' }}" {% if form.last_name.errors %} is-invalid {% endif %}>
+                                    <i class="bi bi-person-badge position-absolute top-50 end-0 translate-middle-y me-2"></i>
+                                </div>
+                                {% if form.last_name.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.last_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group position-relative mb-3">
+                                {{ form.email.label_tag }}
+                                <div class="input-group">
+                                    <input type="email" name="email" id="id_email" class="form-control" placeholder="Email" value="{{ form.email.value|default:'' }}" {% if form.email.errors %} is-invalid {% endif %}>
+                                    <i class="bi bi-envelope position-absolute top-50 end-0 translate-middle-y me-2"></i>
+                                </div>
+                                {% if form.email.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.email.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Nom d'utilisateur -->
+                            <div class="form-group position-relative mb-3">
+                                {{ form.username.label_tag }}
+                                <div class="input-group">
+                                    <input type="text" name="username" id="id_username" class="form-control" placeholder="Nom d'utilisateur" value="{{ form.username.value|default:'' }}" {% if form.username.errors %} is-invalid {% endif %}>
+                                    <i class="bi bi-person-circle position-absolute top-50 end-0 translate-middle-y me-2"></i>
+                                </div>
+                                {% if form.username.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.username.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Mot de passe -->
+                            <div class="form-group position-relative mb-3">
+                                {{ form.password1.label_tag }}
+                                <div class="input-group">
+                                    <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Mot de passe" {% if form.password1.errors %} is-invalid {% endif %}>
+                                    <i class="bi bi-lock position-absolute top-50 end-0 translate-middle-y me-2"></i>
+                                </div>
+                                {% if form.password1.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.password1.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Confirmation du mot de passe -->
+                            <div class="form-group position-relative mb-4">
+                                {{ form.password2.label_tag }}
+                                <div class="input-group">
+                                    <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirmer le mot de passe" {% if form.password2.errors %} is-invalid {% endif %}>
+                                    <i class="bi bi-lock position-absolute top-50 end-0 translate-middle-y me-2"></i>
+                                </div>
+                                {% if form.password2.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.password2.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Bouton d'inscription -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-block">Register</button>
+                            </div>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <div class="text-center">
+                            <p>You are already an account ? <a href="{% url 'login' %}">Login</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'account/base.html' %}
+
+{%block content%}
+<h1 class="title_page text-center mt-4">Login</h1>
+<div class="container d-flex justify-content-center login">
+    <div class="login-card p-4 shadow-lg rounded">
+        <a href="{% url 'articles:article_view' %}" class="btn btn-info retour mb-3">Back</a>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p|safe }}
+
+            <div class="form-group">
+                <button class="btn btn-success btn-block" type="submit">Login</button>
+            </div>
+            
+            <hr class="separateur">
+            
+            <div class="row">
+                <div class="col text-left">
+                    <a href="{% url 'forgot' %}" class="text-danger">Forgotten Password ?</a>
+                </div>
+                <div class="col text-right">
+                    <a href="{% url 'inscription' %}" class="text-primary">Register</a>
+                </div>
+            </div>
+        </form>
+        
+        {% if messages %}
+        <div class="alert-container mt-3">
+            <ul class="list-unstyled">
+                {% for message in messages %}
+                <li class="alert text-danger">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+  footer {
+        margin-top: 50px;
+        height: 100px;
+      }
+      main {
+        min-height: 70vh;
+      }
+      
+/* delete dialog */
+.dialog-confirm {
+    text-align: center;
+    background-color: rgb(211, 224, 236);
+    width: 420px;
+    margin: 50px;
+    padding: 10px;
+    border-radius: 12px;
+  }

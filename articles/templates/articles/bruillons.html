@@ -1,0 +1,87 @@
+{% extends 'articles/base.html' %} {% block title %}Articles Brouillon
+{%endblock %} {% block content %}
+<style>
+  .cadre {
+    margin: 10px;
+  }
+  h1 {
+    text-align: center;
+  }
+  .but {
+    margin: 5px;
+  }
+  img {
+    height: 100%;
+  }
+</style>
+<div class="container">
+  <h1>Drafts Items</h1>
+  <div class="row">
+    {% if articles %} {% for article in articles %}
+    {%if user.is_authenticated and user == article.autor%}
+    <div class="card mb-3 cadre" style="max-width: 540px">
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% if article.imagearticle %}
+          <img
+            src="{{ article.imagearticle.url }}"
+            class="card-img-top"
+            alt="Image"
+          />
+          {% else %}
+          <img src="" class="card-img-top" alt="Image par défaut" />
+          {% endif %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <p class="card-text">{{ article.sumary }}</p>
+            <p class="card-text">
+              <small class="text-body-secondary">{{ article.date_pub }}</small>
+            </p>
+            <div class="row">
+              <a
+                href="{%url 'articles:update_article' article.pk%}"
+                class="btn btn-primary col but"
+              >
+                <i class="bi bi-pencil-fill"> </i>Continue
+              </a>
+              <a
+                href="{%url 'articles:delete_article' article.pk%}"
+                class="btn btn-danger col but"
+              >
+                <i class="bi bi-trash3-fill"></i> Delete</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endif%}
+    {% endfor %} {% else %}
+    <p>No draft articles available.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+<div class="col-md-4">
+  <div class="card">
+    {% if article.imagearticle %}
+    <img
+      src="{{ article.imagearticle.url }}"
+      class="card-img-top"
+      alt="Image"
+    />
+    {% else %}
+    <img src="" class="card-img-top" alt="Image par défaut" />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ article.title }}</h5>
+      <p class="card-text">{{ article.sumary }}</p>
+      <a href="{%url 'update_article' article.pk%}" class="btn btn-primary"
+        >Ouvrir</a
+      >
+    </div>
+  </div>
+</div>

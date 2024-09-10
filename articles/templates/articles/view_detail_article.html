@@ -1,0 +1,101 @@
+{% extends 'articles/base.html' %}
+
+{% block title %}
+Détails de l'article
+{% endblock %}
+
+{% block content %}
+<style>
+  .edit-btn {
+    position: fixed;
+    right: 15px;
+    top: 20px;
+    z-index: 1000; /* Assure que les boutons sont toujours au-dessus des autres éléments */
+  }
+  .btn-action {
+    margin-bottom: 10px;
+    border-radius: 50%;
+    padding: 10px 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  .image-article {
+    width: 100%;
+    max-height: 400px; /* Ajustez la hauteur maximale pour un meilleur aspect */
+    object-fit: cover; /* Assure que l'image est bien recadrée */
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .comment-form {
+    margin-top: 30px;
+  }
+  .comment-form form {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  .alert-info {
+    border-radius: 8px;
+  }
+</style>
+
+<div class="container">
+  <div class="edit-btn">
+    {% if user.is_authenticated and user == article.autor %}
+      <a href="{% url 'articles:update_article' article.pk %}" class="btn btn-info btn-action">
+        <i class="bi bi-pencil-fill"></i>
+      </a>
+      <a href="{% url 'articles:delete_article' article.pk %}" class="btn btn-danger btn-action">
+        <i class="bi bi-trash3-fill"></i>
+      </a>
+    {% endif %}
+    <a href="{% url 'articles:article_view' %}" class="btn btn-primary btn-action">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+  </div>
+
+  {% if article.imagearticle %}
+    <img src="{{ article.imagearticle.url }}" alt="Image de l'article" class="img-fluid image-article" />
+  {% endif %}
+
+  <h1>{{ article.title }}</h1>
+  <p class="text-muted text-center">{{ article.date_pub }}</p>
+  <p>{{ article.content }}</p>
+
+  <div class="row">
+    {% for comment in article.comment_set.all %}
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ comment.user.get_full_name }}</h5>
+            <p class="card-text">{{ comment.comment }}</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="alert alert-info" role="alert">
+        Pas de commentaire disponible pour cet article.
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if user.is_authenticated %}
+    <div class="comment-form">
+      <form action="{% url 'articles:commentaire' article.pk %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Envoyer</button>
+      </form>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

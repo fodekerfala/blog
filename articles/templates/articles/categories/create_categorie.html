@@ -1,0 +1,33 @@
+{%extends 'articles/base.html'%} {%block title %} Add Item
+{%endblock%} {%block content%}
+<style>
+  .content-categorie{
+    text-align: center;
+    background-color: aliceblue;
+    margin: 90px;
+    padding: 70px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 1px rgb(101, 101, 101);
+    position: relative;
+
+  }
+ .back
+ {
+    position: absolute;
+   top: 0;
+   left: 0;
+ }
+</style>
+<div class="container  d-flex justify-content-center ">
+  
+  <div class="content-categorie">
+    <a class="btn btn-warning back" href="{%url 'articles:view_categorie'%}"><i class="bi bi-arrow-left"></i>Back</a>
+    <form action="" method="post" enctype="multipart/form-data">
+    {%csrf_token%} {{form.as_p}}
+   <div class="row">
+     <button class="btn btn-primary" type="submit">Create</button>
+   </div>
+  </form>
+  </div>
+</div>
+{%endblock%}
